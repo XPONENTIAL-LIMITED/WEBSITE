@@ -28,8 +28,8 @@ function Logo({ light = false }: { light?: boolean }) {
     <span className="flex h-10 items-start gap-1 select-none md:h-12 md:gap-1.5">
       <img
         src={xponentialMark}
-        alt="Xponential X mark"
-        className="h-full w-auto object-contain"
+        alt="X"
+        className="h-full w-auto object-contain color-green"
       />
       <span
         className="font-black text-[1.05rem] leading-none tracking-[-0.02em] pt-1 md:pt-1.5 md:text-[1.3rem]"
