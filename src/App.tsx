@@ -4,7 +4,7 @@ import xponentialMark from "./imports/Xponential_X_transparent.png"
 // ---- Scroll-in animation hook ----
 function useInView(threshold = 0.12) {
   const ref = useRef<HTMLElement>(null)
-  const [inView, setInView] = useState(false)
+  const [inView, setInView] = useState(true)
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -138,7 +138,7 @@ function Nav({ onContact }: { onContact: () => void }) {
 
 // ---- Hero ----
 function Hero({ onContact }: { onContact: () => void }) {
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(true)
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 80)
@@ -146,16 +146,16 @@ function Hero({ onContact }: { onContact: () => void }) {
   }, [])
 
   return (
-    <section className="relative min-h-[700px] md:min-h-screen flex flex-col justify-end pb-20 md:pb-28 md:pt-44 overflow-hidden bg-[#060a06]">
+    <section className="relative min-h-[700px] md:min-h-screen flex flex-col justify-end pb-20 md:pb-28 md:pt-44 overflow-hidden bg-[#f6f8f6]">
       {/* Background image */}
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=1600&h=900&fit=crop&auto=format"
           alt="Xponential professionals collaborating"
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060a06] via-[#060a06]/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060a06]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f6f8f6] via-[#f6f8f6]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f6f8f6]/85 to-transparent" />
       </div>
 
       {/* Top eyebrow - fades in */}
@@ -164,7 +164,7 @@ function Hero({ onContact }: { onContact: () => void }) {
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }`}
       >
-        <p className="text-white/35 font-mono text-[10px] leading-relaxed tracking-[0.22em] md:tracking-[0.35em] uppercase text-right">
+        <p className="text-black/35 font-mono text-[10px] leading-relaxed tracking-[0.22em] md:tracking-[0.35em] uppercase text-right">
           <span className="block sm:inline">Lusaka, Zambia</span>
           <span className="hidden sm:inline"> - </span>
           <span className="block sm:inline">Est. ICT Excellence</span>
@@ -179,16 +179,16 @@ function Hero({ onContact }: { onContact: () => void }) {
           }`}
         >
           <h1
-            className="font-black text-white leading-[0.88] mb-10 md:mb-14"
+            className="font-black text-black leading-[0.88] mb-10 md:mb-14"
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(3rem, 10vw, 9rem)",
             }}
           >
             <span className="block">YOUR</span>
-            <span className="block text-white/90">ICT</span>
+            <span className="block text-black/90">ICT</span>
             <span className="block">EXCELLENCE</span>
-            <span className="block text-white/55">PARTNER.</span>
+            <span className="block text-black/55">PARTNER.</span>
           </h1>
         </div>
 
@@ -198,20 +198,20 @@ function Hero({ onContact }: { onContact: () => void }) {
             loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          <p className="text-white/45 text-base md:text-lg max-w-sm leading-relaxed">
+          <p className="text-black/45 text-base md:text-lg max-w-sm leading-relaxed">
             We plan, build, support and manage IT environments for businesses across Zambia  using technologies that are fit for purpose.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 shrink-0">
             <a
               href="#services"
-              className="group inline-flex items-center gap-3 text-white font-bold text-sm tracking-wide border-b-2 border-white/30 pb-1 hover:border-white hover:text-white transition-all duration-200"
+              className="group inline-flex items-center gap-3 text-black font-bold text-sm tracking-wide border-b-2 border-black/30 pb-1 hover:border-black hover:text-black transition-all duration-200"
             >
               Explore Services
               <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
             </a>
             <button
               onClick={onContact}
-              className="inline-flex items-center gap-3 text-white/60 font-bold text-sm tracking-wide border-b-2 border-white/25 pb-1 hover:text-white hover:border-white transition-all duration-200"
+              className="inline-flex items-center gap-3 text-black/60 font-bold text-sm tracking-wide border-b-2 border-black/25 pb-1 hover:text-black hover:border-black transition-all duration-200"
             >
               Talk to Us →
             </button>
@@ -221,7 +221,7 @@ function Hero({ onContact }: { onContact: () => void }) {
 
       {/* Scroll line */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="w-px h-14 bg-white/15 animate-pulse" />
+        <div className="w-px h-14 bg-black/15 animate-pulse" />
       </div>
     </section>
   )
@@ -321,18 +321,18 @@ function Services() {
     <section
       id="services"
       ref={ref as React.RefObject<HTMLElement>}
-      className={`py-24 md:py-36 bg-[#060a06] transition-all duration-700 ${
+      className={`py-24 md:py-36 bg-[#f6f8f6] transition-all duration-700 ${
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
         <div className="mb-14 md:mb-20">
-          <p className="text-white/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
+          <p className="text-black/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
             Our Portfolio
           </p>
           <h2
-            className="font-black text-white leading-[0.88] mb-6"
+            className="font-black text-black leading-[0.88] mb-6"
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(2.4rem, 6vw, 5rem)",
@@ -342,19 +342,19 @@ function Services() {
             <br />
             DO BEST.
           </h2>
-          <div className="w-12 h-[2px] bg-white/20" />
+          <div className="w-12 h-[2px] bg-black/20" />
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-col sm:flex-row border border-[#303330] mb-14">
+        <div className="flex flex-col sm:flex-row border border-[#d9ddd9] mb-14">
           {(Object.keys(SERVICE_DATA) as ServiceKey[]).map((key) => (
             <button
               key={key}
               onClick={() => setActive(key)}
-              className={`flex-1 py-4 px-6 text-xs font-bold tracking-[0.2em] uppercase transition-all duration-200 text-left sm:text-center border-b sm:border-b-0 sm:border-r border-[#303330] last:border-0 ${
+              className={`flex-1 py-4 px-6 text-xs font-bold tracking-[0.2em] uppercase transition-all duration-200 text-left sm:text-center border-b sm:border-b-0 sm:border-r border-[#d9ddd9] last:border-0 ${
                 active === key
                   ? "bg-[#5ab350] text-black"
-                  : "text-white/45 hover:text-white hover:bg-[#0d160d]"
+                  : "text-black/45 hover:text-black hover:bg-[#e7ebe6]"
               }`}
             >
               {SERVICE_DATA[key].label}
@@ -366,7 +366,7 @@ function Services() {
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div>
             <h3
-              className="font-black text-white leading-[0.92] mb-6 whitespace-pre-line"
+              className="font-black text-black leading-[0.92] mb-6 whitespace-pre-line"
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2rem, 4vw, 3.5rem)",
@@ -374,18 +374,18 @@ function Services() {
             >
               {data.headline}
             </h3>
-            <p className="text-white/45 text-base md:text-lg mb-10 leading-relaxed">
+            <p className="text-black/45 text-base md:text-lg mb-10 leading-relaxed">
               {data.description}
             </p>
             <div className="flex flex-col gap-7">
               {data.items.map((item) => (
                 <div key={item.cat} className="flex gap-5">
-                  <div className="shrink-0 w-[2px] bg-white/20 mt-1 self-stretch min-h-[2.5rem]" />
+                  <div className="shrink-0 w-[2px] bg-black/20 mt-1 self-stretch min-h-[2.5rem]" />
                   <div>
-                    <span className="text-white/45 font-bold text-[10px] tracking-[0.25em] uppercase block mb-1">
+                    <span className="text-black/45 font-bold text-[10px] tracking-[0.25em] uppercase block mb-1">
                       {item.cat}
                     </span>
-                    <p className="text-white/60 text-sm leading-relaxed">
+                    <p className="text-black/60 text-sm leading-relaxed">
                       {item.detail}
                     </p>
                   </div>
@@ -393,13 +393,13 @@ function Services() {
               ))}
             </div>
           </div>
-          <div className="relative bg-[#0d160d] overflow-hidden">
+          <div className="relative bg-[#e7ebe6] overflow-hidden">
             <img
               src={data.image}
               alt={data.imageAlt}
               className="w-full h-[300px] md:h-[420px] object-cover transition-opacity duration-500"
             />
-            <div className="absolute inset-0 bg-[#060a06]/15" />
+            <div className="absolute inset-0 bg-black/5" />
           </div>
         </div>
       </div>
@@ -415,7 +415,7 @@ function About() {
     <section
       id="about"
       ref={ref as React.RefObject<HTMLElement>}
-      className={`py-24 md:py-36 bg-[#080d08] transition-all duration-700 ${
+      className={`py-24 md:py-36 bg-[#eef1ed] transition-all duration-700 ${
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
@@ -428,16 +428,16 @@ function About() {
               alt="Xponential team reviewing solutions together"
               className="w-full h-[380px] md:h-[540px] object-cover"
             />
-            <div className="absolute -bottom-4 -right-4 w-40 h-40 border border-white/8 pointer-events-none hidden md:block" />
+            <div className="absolute -bottom-4 -right-4 w-40 h-40 border border-black/8 pointer-events-none hidden md:block" />
             {/* Stat badge */}
-            <div className="absolute bottom-8 left-0 bg-[#060a06] border-t border-r border-[#303330] p-6">
+            <div className="absolute bottom-8 left-0 bg-white border-t border-r border-[#d9ddd9] p-6">
               <p
-                className="font-black text-white leading-none"
+                className="font-black text-black leading-none"
                 style={{ fontFamily: "var(--font-display)", fontSize: "3rem" }}
               >
                 3
               </p>
-              <p className="text-white/45 text-[10px] tracking-[0.25em] uppercase mt-1">
+              <p className="text-black/45 text-[10px] tracking-[0.25em] uppercase mt-1">
                 Core Specializations
               </p>
             </div>
@@ -445,11 +445,11 @@ function About() {
 
           {/* Text column */}
           <div>
-            <p className="text-white/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
+            <p className="text-black/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
               Who We Are
             </p>
             <h2
-              className="font-black text-white leading-[0.88] mb-8"
+              className="font-black text-black leading-[0.88] mb-8"
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.4rem, 5vw, 4.5rem)",
@@ -461,28 +461,28 @@ function About() {
               <br />
               ZAMBIAN.
             </h2>
-            <p className="text-white/45 text-base md:text-lg leading-relaxed mb-5">
+            <p className="text-black/45 text-base md:text-lg leading-relaxed mb-5">
               XPONENTIAL was founded with a clear vision to offer excellent ICT Services and Infrastructure. We are a specialised Solutions Provider that helps businesses plan, build, support and manage different IT environments.
             </p>
-            <p className="text-white/45 text-base md:text-lg leading-relaxed mb-12">
+            <p className="text-black/45 text-base md:text-lg leading-relaxed mb-12">
               We strive to be a trusted partner with a clear understanding of our customers&apos; operations, enabling them to achieve desired business outcomes. We adapt across different industries using our deep experience.
             </p>
 
             {/* Vision / Mission */}
-            <div className="grid grid-cols-2 gap-px bg-[#303330]">
-              <div className="bg-[#080d08] p-6">
-                <p className="text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-3">
+            <div className="grid grid-cols-2 gap-px bg-[#d9ddd9]">
+              <div className="bg-[#eef1ed] p-6">
+                <p className="text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-3">
                   Vision
                 </p>
-                <p className="text-white text-sm leading-relaxed">
+                <p className="text-black text-sm leading-relaxed">
                   Be the most valued ICT service provider
                 </p>
               </div>
-              <div className="bg-[#080d08] p-6">
-                <p className="text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-3">
+              <div className="bg-[#eef1ed] p-6">
+                <p className="text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-3">
                   Mission
                 </p>
-                <p className="text-white text-sm leading-relaxed">
+                <p className="text-black text-sm leading-relaxed">
                   To serve our Customers with Excellence
                 </p>
               </div>
@@ -530,17 +530,17 @@ function Values() {
     <section
       id="values"
       ref={ref as React.RefObject<HTMLElement>}
-      className={`py-24 md:py-36 bg-[#060a06] transition-all duration-700 ${
+      className={`py-24 md:py-36 bg-[#f6f8f6] transition-all duration-700 ${
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="mb-14 md:mb-20">
-          <p className="text-white/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
+          <p className="text-black/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
             Core Values
           </p>
           <h2
-            className="font-black text-white leading-[0.88]"
+            className="font-black text-black leading-[0.88]"
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(2.4rem, 6vw, 5rem)",
@@ -552,15 +552,15 @@ function Values() {
           </h2>
         </div>
 
-        <div className="divide-y divide-[#303330]">
+        <div className="divide-y divide-[#d9ddd9]">
           {VALUES.map((v, i) => (
             <div
               key={v.word}
-              className="group flex items-start gap-6 md:gap-14 py-7 md:py-9 hover:bg-[#0d160d] transition-colors duration-200 px-4 -mx-4"
+              className="group flex items-start gap-6 md:gap-14 py-7 md:py-9 hover:bg-[#e7ebe6] transition-colors duration-200 px-4 -mx-4"
               style={{ transitionDelay: `${i * 40}ms` }}
             >
               <span
-                className="font-black text-white/10 group-hover:text-white/50 transition-colors duration-300 leading-none shrink-0 w-12 md:w-20 text-center"
+                className="font-black text-black/10 group-hover:text-black/50 transition-colors duration-300 leading-none shrink-0 w-12 md:w-20 text-center"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
@@ -570,12 +570,12 @@ function Values() {
               </span>
               <div className="flex flex-col md:flex-row md:items-center md:gap-10 flex-1 pt-1">
                 <h3
-                  className="font-black text-white text-lg md:text-2xl md:w-44 shrink-0"
+                  className="font-black text-black text-lg md:text-2xl md:w-44 shrink-0"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {v.word}
                 </h3>
-                <p className="text-white/45 text-sm md:text-base leading-relaxed mt-1 md:mt-0">
+                <p className="text-black/45 text-sm md:text-base leading-relaxed mt-1 md:mt-0">
                   {v.desc}
                 </p>
               </div>
@@ -584,22 +584,22 @@ function Values() {
         </div>
 
         {/* Team image strip */}
-        <div className="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-3 gap-px bg-[#303330]">
-          <div className="bg-[#060a06] overflow-hidden">
+        <div className="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-3 gap-px bg-[#d9ddd9]">
+          <div className="bg-[#f6f8f6] overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1573164574397-dd250bc8a598?w=600&h=340&fit=crop&auto=format"
               alt="Xponential professionals in a business setting"
               className="w-full h-40 md:h-52 object-cover opacity-70 hover:opacity-100 transition-opacity duration-300"
             />
           </div>
-          <div className="bg-[#060a06] overflow-hidden">
+          <div className="bg-[#f6f8f6] overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=600&h=340&fit=crop&auto=format"
               alt="Team collaboration session"
               className="w-full h-40 md:h-52 object-cover opacity-70 hover:opacity-100 transition-opacity duration-300"
             />
           </div>
-          <div className="bg-[#060a06] overflow-hidden col-span-2 md:col-span-1">
+          <div className="bg-[#f6f8f6] overflow-hidden col-span-2 md:col-span-1">
             <img
               src="https://images.unsplash.com/photo-1573166475912-1ed8b4f093d2?w=600&h=340&fit=crop&auto=format"
               alt="Xponential professional"
@@ -614,19 +614,22 @@ function Values() {
 
 // ---- Partners ----
 const PARTNERS = [
-  { name: "HPE", logo: "https://cdn.simpleicons.org/hpe/111111" },
-  { name: "Lenovo", logo: "https://cdn.simpleicons.org/lenovo/111111" },
-  { name: "Google", logo: "https://cdn.simpleicons.org/google/111111" },
+  { name: "HPE" },
+  { name: "Lenovo" },
+  { name: "Google" },
+  { name: "Duxbury" },
+  { name: "Red Dot" },
+  { name: "Zamtel" },
 ]
 
 function Partners() {
   return (
-    <section className="border-y border-[#d9ddd9] bg-white py-12 md:py-16 overflow-hidden">
+    <section className="border-y border-[#303330] bg-[#060a06] py-12 md:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-10 mb-9 md:mb-11">
-        <p className="text-black/45 font-mono text-[10px] tracking-[0.35em] uppercase mb-3">
+        <p className="text-white/45 font-mono text-[10px] tracking-[0.35em] uppercase mb-3">
           Technology Partners
         </p>
-        <p className="max-w-xl text-black/65 text-sm md:text-base leading-relaxed">
+        <p className="max-w-xl text-white/65 text-sm md:text-base leading-relaxed">
           Trusted technology from partners who help us deliver practical, dependable solutions.
         </p>
       </div>
@@ -636,15 +639,10 @@ function Partners() {
           {[...PARTNERS, ...PARTNERS].map((partner, index) => (
             <div
               key={`${partner.name}-${index}`}
-              className="flex items-center justify-center gap-4 w-[14rem] md:w-[22rem] h-16 md:h-20 border-r border-[#d9ddd9] px-8 md:px-16"
+              className="flex items-center justify-center w-[14rem] md:w-[22rem] h-16 md:h-20 border-r border-[#303330] px-8 md:px-16"
               aria-hidden={index >= PARTNERS.length}
             >
-              <img
-                src={partner.logo}
-                alt={index < PARTNERS.length ? `${partner.name} logo` : ""}
-                className="h-8 md:h-10 w-8 md:w-10 opacity-75 transition-opacity duration-300"
-              />
-              <span className="text-black/75 font-semibold text-sm md:text-base whitespace-nowrap">
+              <span className="text-white/75 font-black tracking-wide text-base md:text-lg uppercase whitespace-nowrap">
                 {partner.name}
               </span>
             </div>
@@ -697,13 +695,13 @@ function ContactSection() {
   }
 
   const inputClass =
-    "w-full bg-transparent border border-[#303330] focus:border-white/50 text-white px-4 py-3 text-sm outline-none transition-colors duration-200 placeholder:text-white/35"
+    "w-full bg-transparent border border-[#d9ddd9] focus:border-black/40 text-black px-4 py-3 text-sm outline-none transition-colors duration-200 placeholder:text-black/35"
 
   return (
     <section
       id="contact"
       ref={ref as React.RefObject<HTMLElement>}
-      className={`py-24 md:py-36 bg-[#080d08] transition-all duration-700 ${
+      className={`py-24 md:py-36 bg-[#eef1ed] transition-all duration-700 ${
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
@@ -711,11 +709,11 @@ function ContactSection() {
         <div className="grid md:grid-cols-2 gap-14 md:gap-24">
           {/* Left info */}
           <div>
-            <p className="text-white/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
+            <p className="text-black/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
               Get in Touch
             </p>
             <h2
-              className="font-black text-white leading-[0.88] mb-8"
+              className="font-black text-black leading-[0.88] mb-8"
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.4rem, 5vw, 4.5rem)",
@@ -727,38 +725,38 @@ function ContactSection() {
               <br />
               GREAT.
             </h2>
-            <p className="text-white/45 text-base md:text-lg leading-relaxed mb-12">
+            <p className="text-black/45 text-base md:text-lg leading-relaxed mb-12">
               Whether you are looking for an ICT solutions partner or want to explore a business relationship, we would love to hear from you.
             </p>
 
             <div className="flex flex-col gap-8">
               <div>
-                <p className="text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
+                <p className="text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
                   Email
                 </p>
                 <a
                   href="mailto:solution@xponential.co.zm"
-                  className="text-white hover:text-white/80 transition-colors font-medium underline underline-offset-4 text-sm"
+                  className="text-black hover:text-black/80 transition-colors font-medium underline underline-offset-4 text-sm"
                 >
                   solution@xponential.co.zm
                 </a>
               </div>
               <div>
-                <p className="text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
+                <p className="text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
                   Phone
                 </p>
                 <a
                   href="tel:+260978990533"
-                  className="text-white hover:text-white/80 transition-colors font-medium underline underline-offset-4 text-sm"
+                  className="text-black hover:text-black/80 transition-colors font-medium underline underline-offset-4 text-sm"
                 >
                   +260 978 990 533
                 </a>
               </div>
               <div>
-                <p className="text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
+                <p className="text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
                   Address
                 </p>
-                <address className="text-white/45 text-sm leading-relaxed not-italic">
+                <address className="text-black/45 text-sm leading-relaxed not-italic">
                   4 on Bishop Road
                   <br />
                   Kabulonga, Lusaka
@@ -774,7 +772,7 @@ function ContactSection() {
             {sent ? (
               <div className="flex flex-col gap-5 py-12">
                 <p
-                  className="font-black text-white leading-none"
+                  className="font-black text-black leading-none"
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "5rem",
@@ -782,12 +780,12 @@ function ContactSection() {
                 >
                   Done.
                 </p>
-                <p className="text-white/45 text-base leading-relaxed">
+                <p className="text-black/45 text-base leading-relaxed">
                   Your email client should open with the message pre-filled. We will get back to you shortly.
                 </p>
                 <button
                   onClick={() => setSent(false)}
-                  className="text-white/50 text-sm font-bold tracking-wide border-b border-white/25 pb-0.5 w-fit hover:text-white hover:border-white transition-colors duration-200"
+                  className="text-black/50 text-sm font-bold tracking-wide border-b border-black/25 pb-0.5 w-fit hover:text-black hover:border-black transition-colors duration-200"
                 >
                   Send another message
                 </button>
@@ -800,7 +798,7 @@ function ContactSection() {
                   { name: "company", label: "Company / Organisation", type: "text", required: false, placeholder: "Optional" },
                 ].map((field) => (
                   <div key={field.name}>
-                    <label className="block text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
+                    <label className="block text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
                       {field.label}
                     </label>
                     <input
@@ -816,7 +814,7 @@ function ContactSection() {
                   </div>
                 ))}
                 <div>
-                  <label className="block text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
+                  <label className="block text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
                     Message
                   </label>
                   <textarea
@@ -927,12 +925,12 @@ function Footer() {
 // ---- 404 Page ----
 function NotFoundPage({ onHome }: { onHome: () => void }) {
   return (
-    <div className="min-h-screen bg-[#060a06] flex flex-col items-start justify-center px-6 md:px-16 pt-24">
-      <p className="text-white/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
+    <div className="min-h-screen bg-[#f6f8f6] flex flex-col items-start justify-center px-6 md:px-16 pt-24">
+      <p className="text-black/35 font-mono text-[10px] tracking-[0.35em] uppercase mb-5">
         Error
       </p>
       <h1
-        className="font-black text-white leading-none mb-3"
+        className="font-black text-black leading-none mb-3"
         style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(6rem, 22vw, 14rem)",
@@ -940,13 +938,13 @@ function NotFoundPage({ onHome }: { onHome: () => void }) {
       >
         404
       </h1>
-      <div className="w-16 h-[2px] bg-white/20 mb-8" />
-      <p className="text-white/45 text-lg md:text-xl mb-12 max-w-md leading-relaxed">
+      <div className="w-16 h-[2px] bg-black/20 mb-8" />
+      <p className="text-black/45 text-lg md:text-xl mb-12 max-w-md leading-relaxed">
         This page does not exist. But our ICT solutions do.
       </p>
       <button
         onClick={onHome}
-        className="group inline-flex items-center gap-3 text-white/60 font-bold text-sm tracking-wide border-b-2 border-white/25 pb-1 hover:text-white hover:border-white transition-all duration-200"
+        className="group inline-flex items-center gap-3 text-black/60 font-bold text-sm tracking-wide border-b-2 border-black/25 pb-1 hover:text-black hover:border-black transition-all duration-200"
       >
         <span className="group-hover:-translate-x-1 transition-transform duration-200">←</span>
         Return to Home
@@ -993,7 +991,7 @@ function MobileContactSheet({
       />
       {/* Sheet */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[#0a0f0a] border-t border-[#303330] transition-transform duration-300 ${
+        className={`fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-[#d9ddd9] transition-transform duration-300 ${
           open ? "translate-y-0" : "translate-y-full"
         }`}
         style={{ maxHeight: "88vh", overflowY: "auto" }}
@@ -1001,14 +999,14 @@ function MobileContactSheet({
         <div className="p-6">
           <div className="flex items-center justify-between mb-7">
             <h3
-              className="font-black text-white text-2xl"
+              className="font-black text-black text-2xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Get in Touch
             </h3>
             <button
               onClick={onClose}
-              className="text-white/45 hover:text-white text-3xl leading-none transition-colors duration-200"
+              className="text-black/45 hover:text-black text-3xl leading-none transition-colors duration-200"
               aria-label="Close"
             >
               &times;
@@ -1018,12 +1016,12 @@ function MobileContactSheet({
           {sent ? (
             <div className="py-8 text-center">
               <p
-                className="font-black text-white text-5xl mb-3"
+                className="font-black text-black text-5xl mb-3"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Sent!
               </p>
-              <p className="text-white/45 text-sm">
+              <p className="text-black/45 text-sm">
                 Opening your email client now...
               </p>
             </div>
@@ -1034,7 +1032,7 @@ function MobileContactSheet({
                 { name: "email", label: "Email", type: "email", required: true },
               ].map((f) => (
                 <div key={f.name}>
-                  <label className="block text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
+                  <label className="block text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
                     {f.label}
                   </label>
                   <input
@@ -1044,12 +1042,12 @@ function MobileContactSheet({
                     onChange={(e) =>
                       setForm((p) => ({ ...p, [f.name]: e.target.value }))
                     }
-                    className="w-full bg-transparent border border-[#303330] focus:border-white/50 text-white px-4 py-3 text-sm outline-none"
+                    className="w-full bg-transparent border border-[#d9ddd9] focus:border-black/40 text-black px-4 py-3 text-sm outline-none"
                   />
                 </div>
               ))}
               <div>
-                <label className="block text-white/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
+                <label className="block text-black/35 font-mono text-[10px] tracking-[0.25em] uppercase mb-2">
                   Message
                 </label>
                 <textarea
@@ -1059,7 +1057,7 @@ function MobileContactSheet({
                   onChange={(e) =>
                     setForm((p) => ({ ...p, message: e.target.value }))
                   }
-                  className="w-full bg-transparent border border-[#303330] focus:border-white/50 text-white px-4 py-3 text-sm outline-none resize-none"
+                  className="w-full bg-transparent border border-[#d9ddd9] focus:border-black/40 text-black px-4 py-3 text-sm outline-none resize-none"
                 />
               </div>
               <button
@@ -1072,16 +1070,16 @@ function MobileContactSheet({
           )}
 
           {/* Contact info */}
-          <div className="mt-6 pt-6 border-t border-[#303330] flex flex-col gap-3">
+          <div className="mt-6 pt-6 border-t border-[#d9ddd9] flex flex-col gap-3">
             <a
               href="tel:+260978990533"
-              className="text-white/45 text-sm underline underline-offset-4 hover:text-white transition-colors duration-200"
+              className="text-black/45 text-sm underline underline-offset-4 hover:text-black transition-colors duration-200"
             >
               +260 978 990 533
             </a>
             <a
               href="mailto:solution@xponential.co.zm"
-              className="text-white/45 text-sm underline underline-offset-4 hover:text-white transition-colors duration-200"
+              className="text-black/45 text-sm underline underline-offset-4 hover:text-black transition-colors duration-200"
             >
               solution@xponential.co.zm
             </a>
@@ -1108,7 +1106,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bg-[#060a06] min-h-screen">
+    <div className="bg-[#f6f8f6] min-h-screen">
       <Nav onContact={() => setContactOpen(true)} />
 
       {page === "404" ? (

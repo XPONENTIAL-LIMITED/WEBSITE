@@ -15,8 +15,8 @@ body,
 
 body {
   font-family: var(--font-body);
-  background: #060a06;
-  color: #e8ede8;
+  background: #f6f8f6;
+  color: #171a17;
 }
 
 /* Hide scrollbar, show on hover/scroll */
