@@ -696,7 +696,11 @@ function ContactSection() {
       await sendContactEmail(form)
       setStatus("sent")
     } catch (err) {
-      console.error("Contact email failed:", err)
+      console.error(
+        "Contact email failed:",
+        (err as { status?: number; text?: string })?.text ?? err,
+        err,
+      )
       setStatus("error")
     }
   }
@@ -995,7 +999,11 @@ function MobileContactSheet({
         setForm(EMPTY_FORM)
       }, 2500)
     } catch (err) {
-      console.error("Contact email failed:", err)
+      console.error(
+        "Contact email failed:",
+        (err as { status?: number; text?: string })?.text ?? err,
+        err,
+      )
       setStatus("error")
     }
   }

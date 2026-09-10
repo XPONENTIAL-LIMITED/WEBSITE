@@ -35,23 +35,31 @@ export async function sendContactEmail(form: ContactForm): Promise<void> {
 
   const company = form.company.trim() || "Not provided"
 
-  // 1. Notify the Xponential inbox.
-  await emailjs.send(emailConfig.serviceId, emailConfig.contactTemplateId, {
-    from_name: form.name,
-    from_email: form.email,
-    reply_to: form.email,
+  // Keys must match the {{placeholders}} configured on the EmailJS templates.
+  // Both templates use {{name}}, {{email}}, {{title}}, {{message}}, {{company}};
+  // the from_*/to_*/reply_to aliases are kept for any legacy placeholders.
+  const params = {
+    name: form.name,
+    email: form.email,
+    title: form.name,
     company,
     message: form.message,
+    from_name: form.name,
+    from_email: form.email,
+    to_name: form.name,
+    reply_to: form.email,
+  }
+
+  // 1. Notify the Xponential inbox (template "To Email" is a fixed address).
+  await emailjs.send(emailConfig.serviceId, emailConfig.contactTemplateId, {
+    ...params,
     to_email: emailConfig.toEmail,
   })
 
-  // 2. Automated acknowledgement to the sender.
+  // 2. Automated acknowledgement to the sender (template "To Email" = {{email}}).
   await emailjs.send(emailConfig.serviceId, emailConfig.autoReplyTemplateId, {
-    to_name: form.name,
+    ...params,
     to_email: form.email,
-    reply_to: emailConfig.toEmail,
-    company,
-    message: form.message,
   })
 }
 
