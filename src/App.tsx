@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react"
+import { sendContactEmail } from "@/services/email"
 import xponentialMark from "./imports/Xponential_X_transparent.png"
+import hpeLogo from "./assets/HPE.png"
+import lenovoLogo from "./assets/LENOVO.png"
+import googleLogo from "./assets/GOOGLE.jpeg"
+import duxburyLogo from "./assets/DUXBURY.png"
+import zamtelLogo from "./assets/Zamtel.png"
+import redDotLogo from "./assets/REDDOT.jpeg"
 
 // ---- Scroll-in animation hook ----
 function useInView(threshold = 0.12) {
@@ -614,12 +621,12 @@ function Values() {
 
 // ---- Partners ----
 const PARTNERS = [
-  { name: "HPE" },
-  { name: "Lenovo" },
-  { name: "Google" },
-  { name: "Duxbury" },
-  { name: "Red Dot" },
-  { name: "Zamtel" },
+  { name: "HPE", logo: hpeLogo, invert: false },
+  { name: "Lenovo", logo: lenovoLogo, invert: false },
+  { name: "Google", logo: googleLogo, invert: false },
+  { name: "Duxbury", logo: duxburyLogo, invert: true },
+  { name: "Red Dot", logo: redDotLogo, invert: false },
+  { name: "Zamtel", logo: zamtelLogo, invert: false },
 ]
 
 function Partners() {
@@ -642,9 +649,20 @@ function Partners() {
               className="flex items-center justify-center w-[14rem] md:w-[22rem] h-16 md:h-20 border-r border-[#303330] px-8 md:px-16"
               aria-hidden={index >= PARTNERS.length}
             >
-              <span className="text-white/75 font-black tracking-wide text-base md:text-lg uppercase whitespace-nowrap">
-                {partner.name}
-              </span>
+              {partner.logo ? (
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className={`max-h-11 md:max-h-16 w-auto object-contain ${
+                    partner.invert ? "invert" : ""
+                  }`}
+                  loading="lazy"
+                />
+              ) : (
+                <span className="text-white/75 font-black tracking-wide text-base md:text-lg uppercase whitespace-nowrap">
+                  {partner.name}
+                </span>
+              )}
             </div>
           ))}
         </div>
@@ -661,37 +679,26 @@ type ContactForm = {
   message: string
 }
 
-function sendEmail(form: ContactForm) {
-  const subject = encodeURIComponent("Enquiry from " + form.name)
-  const body = encodeURIComponent(
-    "Name: " +
-      form.name +
-      "\nEmail: " +
-      form.email +
-      "\nCompany: " +
-      form.company +
-      "\n\n" +
-      form.message
-  )
-  window.location.href =
-    "mailto:solution@xponential.co.zm?subject=" + subject + "&body=" + body
-}
+type SendStatus = "idle" | "sending" | "sent" | "error"
+
+const EMPTY_FORM: ContactForm = { name: "", email: "", company: "", message: "" }
 
 // ---- Contact Section ----
 function ContactSection() {
   const { ref, inView } = useInView()
-  const [form, setForm] = useState<ContactForm>({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-  })
-  const [sent, setSent] = useState(false)
+  const [form, setForm] = useState<ContactForm>(EMPTY_FORM)
+  const [status, setStatus] = useState<SendStatus>("idle")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    sendEmail(form)
-    setSent(true)
+    setStatus("sending")
+    try {
+      await sendContactEmail(form)
+      setStatus("sent")
+    } catch (err) {
+      console.error("Contact email failed:", err)
+      setStatus("error")
+    }
   }
 
   const inputClass =
@@ -769,7 +776,7 @@ function ContactSection() {
 
           {/* Form */}
           <div>
-            {sent ? (
+            {status === "sent" ? (
               <div className="flex flex-col gap-5 py-12">
                 <p
                   className="font-black text-black leading-none"
@@ -778,13 +785,18 @@ function ContactSection() {
                     fontSize: "5rem",
                   }}
                 >
-                  Done.
+                  Thank you.
                 </p>
                 <p className="text-black/45 text-base leading-relaxed">
-                  Your email client should open with the message pre-filled. We will get back to you shortly.
+                  Thank you for contacting Xponential. Your message has reached our
+                  team and a confirmation email is on its way to your inbox &mdash;
+                  we will get in touch shortly.
                 </p>
                 <button
-                  onClick={() => setSent(false)}
+                  onClick={() => {
+                    setForm(EMPTY_FORM)
+                    setStatus("idle")
+                  }}
                   className="text-black/50 text-sm font-bold tracking-wide border-b border-black/25 pb-0.5 w-fit hover:text-black hover:border-black transition-colors duration-200"
                 >
                   Send another message
@@ -828,11 +840,18 @@ function ContactSection() {
                     className={inputClass + " resize-none"}
                   />
                 </div>
+                {status === "error" && (
+                  <p className="text-red-600 text-sm leading-relaxed">
+                    Something went wrong sending your message. Please try again or
+                    email us directly at solution@xponential.co.zm.
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full bg-[#5ab350] text-black font-black text-xs tracking-[0.2em] uppercase py-4 hover:bg-[#4a9c40] transition-colors duration-200"
+                  disabled={status === "sending"}
+                  className="w-full bg-[#5ab350] text-black font-black text-xs tracking-[0.2em] uppercase py-4 hover:bg-[#4a9c40] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message →
+                  {status === "sending" ? "Sending…" : "Send Message →"}
                 </button>
               </form>
             )}
@@ -961,23 +980,24 @@ function MobileContactSheet({
   open: boolean
   onClose: () => void
 }) {
-  const [form, setForm] = useState<ContactForm>({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-  })
-  const [sent, setSent] = useState(false)
+  const [form, setForm] = useState<ContactForm>(EMPTY_FORM)
+  const [status, setStatus] = useState<SendStatus>("idle")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    sendEmail(form)
-    setSent(true)
-    setTimeout(() => {
-      onClose()
-      setSent(false)
-      setForm({ name: "", email: "", company: "", message: "" })
-    }, 2000)
+    setStatus("sending")
+    try {
+      await sendContactEmail(form)
+      setStatus("sent")
+      setTimeout(() => {
+        onClose()
+        setStatus("idle")
+        setForm(EMPTY_FORM)
+      }, 2500)
+    } catch (err) {
+      console.error("Contact email failed:", err)
+      setStatus("error")
+    }
   }
 
   return (
@@ -1013,16 +1033,17 @@ function MobileContactSheet({
             </button>
           </div>
 
-          {sent ? (
+          {status === "sent" ? (
             <div className="py-8 text-center">
               <p
                 className="font-black text-black text-5xl mb-3"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Sent!
+                Thank you!
               </p>
               <p className="text-black/45 text-sm">
-                Opening your email client now...
+                Thanks for contacting Xponential. A confirmation email is on its
+                way &mdash; we will get in touch shortly.
               </p>
             </div>
           ) : (
@@ -1060,11 +1081,17 @@ function MobileContactSheet({
                   className="w-full bg-transparent border border-[#d9ddd9] focus:border-black/40 text-black px-4 py-3 text-sm outline-none resize-none"
                 />
               </div>
+              {status === "error" && (
+                <p className="text-red-600 text-sm">
+                  Could not send. Please email solution@xponential.co.zm directly.
+                </p>
+              )}
               <button
                 type="submit"
-                className="w-full bg-[#5ab350] text-black font-black text-xs tracking-[0.2em] uppercase py-4 hover:bg-[#4a9c40] transition-colors duration-200"
+                disabled={status === "sending"}
+                className="w-full bg-[#5ab350] text-black font-black text-xs tracking-[0.2em] uppercase py-4 hover:bg-[#4a9c40] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message →
+                {status === "sending" ? "Sending…" : "Send Message →"}
               </button>
             </form>
           )}
